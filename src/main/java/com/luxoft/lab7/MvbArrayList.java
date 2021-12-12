@@ -1,4 +1,4 @@
-package test.java;
+package com.luxoft.lab7;
 
 public class MvbArrayList<T> {
     private final int INT_SIZE = 16;
@@ -46,10 +46,10 @@ public class MvbArrayList<T> {
             rez+=array[i].toString() + " ";
             if ((i+1) % 30 == 0) {rez+="\n ";}
         }
-        StringBuffer sb = new StringBuffer();
-        sb.append("MAL(max"+array.length+";curr"+pointer+"):");
+        StringBuilder sb = new StringBuilder();
+        sb.append("MAL(max").append(array.length).append(";curr").append(pointer).append("):");
         for(int i=0; i<pointer;i++) {
-            sb.append(array[i].toString() + " ");
+            sb.append(array[i].toString()).append(" ");
             if ((i + 1) % 30 == 0) {
                 sb.append("\n ");
             }
