@@ -59,11 +59,11 @@ public class HashMapImpl {
         curEntry = table[place];
         while (curEntry != null ) {
             if(key.equals(curEntry.getKey())) {
-                rez = table[place].getVal();
-                System.out.println("   Val=" + rez);
+                rez = curEntry.getVal();
+                System.out.println("k="+key+"   Val=" + rez);
                 curEntry.setKey(key);
                 curEntry.setVal(val);
-                curEntry = null;
+                return rez;
             } else {
                 if(curEntry.getNext() != null) {
                     curEntry = curEntry.getNext();
@@ -81,19 +81,40 @@ public class HashMapImpl {
 
     public Object get(Object key){
         Object ret = null;
+        Entry entry;
         int place = hashing(key.hashCode());
-        if(table[place] != null && key.equals(table[place].getKey())) {
-            ret = table[place].getVal();
+        entry =table[place];
+        while (entry != null) {
+            if (key.equals(entry.getKey())){
+                ret = entry.getVal();
+                return ret;
+            } else {
+                entry = entry.getNext();
+            }
         }
         return ret;
     }
 
     public Object remove(Object key){
         Object ret = null;
+        Entry entry;
+        Entry prevEntry = null;
         int place = hashing(key.hashCode());
-        if(table[place] != null && key.equals(table[place].getKey())) {
-            ret = table[place].getVal();
-            table[place] = null;
+        entry = table[place];
+
+        while (entry!= null){
+            if(key.equals(entry.getKey())) {
+                ret = entry.getVal();
+                if (prevEntry == null){
+                    table[place] = entry.getNext();
+                } else {
+                    prevEntry.setNext(entry.getNext());
+                }
+                entry = null;
+            } else {
+                prevEntry = entry;
+                entry = entry.getNext();
+            }
         }
         return ret;
     }
