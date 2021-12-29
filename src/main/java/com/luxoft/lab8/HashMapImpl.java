@@ -1,5 +1,7 @@
 package com.luxoft.lab8;
 
+import java.util.HashMap;
+
 public class HashMapImpl {
     private float loadFactor = 0.75f;
     private int capasity = 10;
